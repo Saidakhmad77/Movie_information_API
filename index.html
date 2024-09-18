@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Info Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .search-box {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .movie-info {
+            margin-top: 20px;
+            text-align: left;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-info img {
+            float: left;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+
+        .movie-info h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .movie-info p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Information Finder</h1>
+        <form method="POST" action="/search" class="search-box">
+            <input type="text" name="movieTitle" placeholder="Enter movie title..." />
+            <button type="submit">Search</button>
+        </form>
+
+        {% if movie %}
+        <div class="movie-info">
+            <img src="{{ movie.poster }}" alt="{{ movie.title }}" width="150" />
+            <h2>{{ movie.title }} ({{ movie.year }})</h2>
+            <p><strong>Genre:</strong> {{ movie.genre }}</p>
+            <p><strong>Director:</strong> {{ movie.director }}</p>
+            <p><strong>Actors:</strong> {{ movie.actors }}</p>
+            <p><strong>Plot:</strong> {{ movie.plot }}</p>
+            <p><strong>IMDB Rating:</strong> {{ movie.rating }}</p>
+        </div>
+        {% elif error %}
+        <p>{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
